@@ -28,8 +28,8 @@ Architecture Design
 
 | Step | Description | Screenshot |
 |---|---|---|
-| **1. Setup** | Created Public Hosted Zone | ![Zone](images/hosted-zone-config.png) |
-| **2. Config** | Pointed A Record to EC2 IP | ![Config](images/Record-config.png) |
+| **1. Setup** | Created Public Hosted Zone | ![Zone](images/SimpleRoutinghosted-zone-config.png) |
+| **2. Config** | Pointed A Record to EC2 IP | ![Config](images/SimpleRoutingRecord-config.png) |
 | **3. Result** | Successful Connection | ![Success](images/simple-routing-config.png) |
 
 </details>
