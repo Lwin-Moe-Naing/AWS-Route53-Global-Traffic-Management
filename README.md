@@ -1,6 +1,6 @@
 # AWS Route 53 - Global Traffic Management
 
-A comprehensive deep dive into Amazon Route 53, implementing all 8 routing policies for high availability, disaster recovery, and performance optimization across multiple AWS Regions.
+A comprehensive deep dive into Amazon Route 53, implementing all 7 routing policies for high availability, disaster recovery, and performance optimization across multiple AWS Regions.
 
 ---
 
@@ -37,9 +37,17 @@ Architecture Design
 ---
 
 ### 2️⃣ Weighted Routing Policy (Traffic Shaping)
-**Scenario:** Distributing traffic (e.g., 80% to Production, 20% to Beta) for A/B testing.
-> *Implementation coming next week...*
+Scenario: Implementing a Canary Deployment or A/B Testing by distributing traffic to different servers based on assigned weights (percentages). シナリオ: 特定の重み（パーセンテージ）に基づいてトラフィックを異なるサーバーに分散させ、カナリアリリースやA/Bテストを実装します。
 
+<details>
+<summary>Click here to view Configuration & Results / 設定と結果を表示するにはここをクリック</summary>
+
+| Step / ステップ | Description / 説明 | Screenshot / スクリーンショット |
+|:---:|---|:---:|
+| **1. Config** | Assigned weights (100, 50, 20) to three different server IPs in the Route 53 console. / Route 53コンソールで、3つの異なるサーバーIPに重み（100, 50, 20）を割り当てました。 | ![Config](images/weighted-routing-record.png) |
+| **2. Result** | Verified via `nslookup` that the domain resolves to the IP with the highest weight (`18.223.171.99`). / `nslookup` を使用して、最も重い値（100）を持つIPアドレスにドメインが解決されることを確認しました。 | ![Success](images/weighted-routing-dns-verification-nslookup.png) |
+
+</details>
 ---
 
 ### 3️⃣ Failover Routing Policy (Disaster Recovery)
