@@ -1,4 +1,4 @@
-# 🌍 AWS Route 53 - Global Traffic Management
+# AWS Route 53 - Global Traffic Management
 
 A comprehensive deep dive into Amazon Route 53, implementing all 8 routing policies for high availability, disaster recovery, and performance optimization across multiple AWS Regions.
 
@@ -18,13 +18,13 @@ Architecture Design
 
 ---
 
-## 🚀 Routing Policies Implementation
+## Routing Policies Implementation
 
 ### 1️⃣ Simple Routing Policy (The Foundation)
 **Scenario:** Mapping the custom domain `www.lwinlmn.com` to a single EC2 Web Server.
 
 <details>
-<summary>📸 Click here to view Configuration & Results</summary>
+<summary>Click here to view Configuration & Results</summary>
 
 | Step | Description | Screenshot |
 |---|---|---|
