@@ -20,7 +20,7 @@ Architecture Design
 
 ## Routing Policies Implementation
 
-### 1️⃣ Simple Routing Policy (The Foundation)
+### 1.Simple Routing Policy (The Foundation)
 **Scenario:** Mapping the custom domain `www.lwinlmn.com` to a single EC2 Web Server.
 
 <details>
@@ -36,8 +36,9 @@ Architecture Design
 
 ---
 
-### 2️⃣ Weighted Routing Policy (Traffic Shaping)
-Scenario: Implementing a Canary Deployment or A/B Testing by distributing traffic to different servers based on assigned weights (percentages). シナリオ: 特定の重み（パーセンテージ）に基づいてトラフィックを異なるサーバーに分散させ、カナリアリリースやA/Bテストを実装します。
+ ### 2.Weighted Routing Policy (Traffic Shaping)
+Scenario: Implementing a Canary Deployment or A/B Testing by distributing traffic to different servers based on assigned weights (percentages).
+シナリオ: 特定の重み（パーセンテージ）に基づいてトラフィックを異なるサーバーに分散させ、カナリアリリースやA/Bテストを実装します。
 
 <details>
 <summary>Click here to view Configuration & Results / 設定と結果を表示するにはここをクリック</summary>
@@ -50,10 +51,16 @@ Scenario: Implementing a Canary Deployment or A/B Testing by distributing traffi
 </details>
 ---
 
-### 3️⃣ Failover Routing Policy (Disaster Recovery)
-**Scenario:** Automatic failover to a backup S3 site when the primary server fails health checks.
-> *Implementation coming next week...*
+### 3.Failover Routing Policy (Disaster Recovery) / フェイルオーバールーティングポリシー
+Scenario: Implementing an Active-Passive Disaster Recovery setup. Traffic is directed to the Primary Server (Ohio) while it is healthy. If the primary region fails, Route 53 automatically detects the failure and redirects users to the Secondary Server (Mumbai). 
+シナリオ: アクティブ/パッシブ構成のディザスタリカバリを実装します。通常、トラフィックは**メインサーバー（オハイオ）に送られますが、メインリージョンに障害が発生した場合、Route 53が自動的に検知し、バックアップサーバー（ムンバイ）にリダイレクトします。
 
+<details> <summary>Click here to view Configuration & Results / 設定と結果を表示するにはここをクリック</summary>
+  Step / ステップ,Description / 説明,Screenshot / スクリーンショット
+1. Primary Setup,Primary instances are running in the Ohio region. / オハイオリージョンでメインインスタンスが稼働中。,![Primary Instances](images/Failover_Primary_Running.png)
+2. Health Check,Monitoring the primary endpoint. Failure is detected when the server stops. / メインエンドポイントを監視。停止時に「Unhealthy（異常）」を検知。,![Health Check](images/Failover_Health_Check_Unhealthy.png)
+3. Failover Action,Traffic is automatically routed to the Secondary Server in Mumbai. / トラフィックが自動的にムンバイのバックアップサーバーへ転送。,![Secondary Result](images/Failover_Secondary_Display.png)
+4. Recovery,"Once the primary server is restored, traffic returns to the Primary Server in Ohio. / メインサーバー復旧後、トラフィックは自動的にオハイオに戻ります。",![Primary Result](images/Failover_Primary_Restored.png)
 ---
 
 ### 4️⃣ Latency & Geolocation Routing
