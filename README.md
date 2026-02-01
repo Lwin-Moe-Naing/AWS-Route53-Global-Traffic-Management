@@ -82,7 +82,7 @@ Scenario: Implementing a Canary Deployment or A/B Testing by distributing traffi
 
 | Step / ステップ | Description / 説明 | Screenshot / スクリーンショット |
 |:---:|---|:---:|
-| **1. Overview** | Configured Latency records for Mumbai and North Virginia in the Hosted Zone. / ホストゾーンでムンバイとバージニア北部用のレイテンシーレコードを設定しました。 | [![Hosted Zone Overview](images/Latency_Hosted_Zone.png) |
+| **1. Overview** | Configured Latency records for Mumbai and North Virginia in the Hosted Zone. / ホストゾーンでムンバイとバージニア北部用のレイテンシーレコードを設定しました。 | [![Hosted Zone Overview](images/latency-hosted-zone-overview.png) |
 | **2. Mumbai Config** | Routing traffic to the Asia Pacific (Mumbai) region for users in Asia. / アジアのユーザー向けに、アジアパシフィック（ムンバイ）リージョンへトラフィックを誘導します。 | [![Mumbai Config](images/latency-config-mumbai.png) |
 | **3. Virginia Config** | Routing traffic to the US East (N. Virginia) region for North American users. / 北米のユーザー向けに、米国東部（バージニア北部）リージョンへトラフィックを誘導します。 | [![Virginia Config](images/latency-config-virginia.png) |
 
