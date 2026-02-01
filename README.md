@@ -38,6 +38,7 @@ Architecture Design
 
  ### 2.Weighted Routing Policy (Traffic Shaping)
 Scenario: Implementing a Canary Deployment or A/B Testing by distributing traffic to different servers based on assigned weights (percentages).
+
 シナリオ: 特定の重み（パーセンテージ）に基づいてトラフィックを異なるサーバーに分散させ、カナリアリリースやA/Bテストを実装します。
 
 <details>
@@ -52,21 +53,40 @@ Scenario: Implementing a Canary Deployment or A/B Testing by distributing traffi
 ---
 
 ### 3.Failover Routing Policy (Disaster Recovery) / フェイルオーバールーティングポリシー
-Scenario: Implementing an Active-Passive Disaster Recovery setup. Traffic is directed to the Primary Server (Ohio) while it is healthy. If the primary region fails, Route 53 automatically detects the failure and redirects users to the Secondary Server (Mumbai). 
-シナリオ: アクティブ/パッシブ構成のディザスタリカバリを実装します。通常、トラフィックは**メインサーバー（オハイオ）に送られますが、メインリージョンに障害が発生した場合、Route 53が自動的に検知し、バックアップサーバー（ムンバイ）にリダイレクトします。
 
-<details> <summary>Click here to view Configuration & Results / 設定と結果を表示するにはここをクリック</summary>
-  Step / ステップ,Description / 説明,Screenshot / スクリーンショット
-1. Primary Setup,Primary instances are running in the Ohio region. / オハイオリージョンでメインインスタンスが稼働中。,![Primary Instances](images/Failover_Primary_Running.png)
-2. Health Check,Monitoring the primary endpoint. Failure is detected when the server stops. / メインエンドポイントを監視。停止時に「Unhealthy（異常）」を検知。,![Health Check](images/Failover_Health_Check_Unhealthy.png)
-3. Failover Action,Traffic is automatically routed to the Secondary Server in Mumbai. / トラフィックが自動的にムンバイのバックアップサーバーへ転送。,![Secondary Result](images/Failover_Secondary_Display.png)
-4. Recovery,"Once the primary server is restored, traffic returns to the Primary Server in Ohio. / メインサーバー復旧後、トラフィックは自動的にオハイオに戻ります。",![Primary Result](images/Failover_Primary_Restored.png)
+**Scenario:** Implementing an **Active-Passive Disaster Recovery** setup. Traffic is directed to the **Primary Server (Ohio)** while it is healthy. If the primary region fails, Route 53 automatically detects the failure and redirects users to the **Secondary Server (Mumbai)**.
+
+**シナリオ:** **アクティブ/パッシブ構成のディザスタリカバリ**を実装します。通常、トラフィックは**メインサーバー（オハイオ）**に送られますが、メインリージョンに障害が発生した場合、Route 53が自動的に検知し、**バックアップサーバー（ムンバイ）**にリダイレクトします。
+
+<details>
+<summary>Click here to view Configuration & Results / 設定と結果を表示するにはここをクリック</summary>
+
+| Step / ステップ | Description / 説明 | Screenshot / スクリーンショット |
+|:---:|---|:---:|
+| **1. Primary Setup** | Primary instances are running in the Ohio region. / オハイオリージョンでメインインスタンスが稼働中。 | ![Primary Setup](images/Failover_Primary_Running.png) |
+| **2. Health Check** | Monitoring the primary endpoint. Failure is detected when the server stops. / メインエンドポイントを監視。停止時に「Unhealthy（異常）」を検知。 | ![Health Check](images/Failover_Health_Check_Unhealthy.png) |
+| **3. Failover Action** | Traffic is automatically routed to the **Secondary Server in Mumbai**. / トラフィックが自動的に**ムンバイのバックアップサーバー**へ転送。 | ![Secondary Result](images/Failover_Secondary_Display.png) |
+| **4. Recovery** | Once the primary server is restored, traffic returns to the **Primary Server in Ohio**. / メインサーバー復旧後、トラフィックは自動的に**オハイオ**に戻ります。 | ![Recovery Result](images/Failover_Primary_Restored.png) |
+
+</details>
 ---
 
-### 4️⃣ Latency & Geolocation Routing
-**Scenario:** Serving content from the nearest region (Mumbai/Singapore) and restricting content based on country.
-> *Implementation coming next week...*
+### 4️⃣ Latency Routing Policy / レイテンシーベースルーティングポリシー
 
+**Scenario:** Optimizing global performance by directing traffic to the AWS region that provides the lowest network latency for the user.
+
+**シナリオ:** ユーザーに対して最もネットワーク遅延（レイテンシー）が少ないAWSリージョンにトラフィックをルーティングし、グローバルなパフォーマンスを最適化します。
+
+<details>
+<summary>Click here to view Configuration & Results / 設定と結果を表示するにはここをクリック</summary>
+
+| Step / ステップ | Description / 説明 | Screenshot / スクリーンショット |
+|:---:|---|:---:|
+| **1. Overview** | Configured Latency records for Mumbai and North Virginia in the Hosted Zone. / ホストゾーンでムンバイとバージニア北部用のレイテンシーレコードを設定しました。 | [![Hosted Zone Overview](images/Latency_Hosted_Zone.png) |
+| **2. Mumbai Config** | Routing traffic to the Asia Pacific (Mumbai) region for users in Asia. / アジアのユーザー向けに、アジアパシフィック（ムンバイ）リージョンへトラフィックを誘導します。 | [![Mumbai Config](images/latency-config-mumbai.png) |
+| **3. Virginia Config** | Routing traffic to the US East (N. Virginia) region for North American users. / 北米のユーザー向けに、米国東部（バージニア北部）リージョンへトラフィックを誘導します。 | [![Virginia Config](images/latency-config-virginia.png) |
+
+</details>
 ---
 
 ## 🛠️ Tech Stack
