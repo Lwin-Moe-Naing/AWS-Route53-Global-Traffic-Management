@@ -71,7 +71,7 @@ Scenario: Implementing a Canary Deployment or A/B Testing by distributing traffi
 </details>
 ---
 
-### 4️⃣ Latency Routing Policy / レイテンシーベースルーティングポリシー
+### 4.Latency Routing Policy / レイテンシーベースルーティングポリシー
 
 **Scenario:** Optimizing global performance by directing traffic to the AWS region that provides the lowest network latency for the user.
 
@@ -89,7 +89,7 @@ Scenario: Implementing a Canary Deployment or A/B Testing by distributing traffi
 </details>
 ---
 
-### 5️⃣ Multivalue Answer Routing Policy / 複数値回答ルーティングポリシー
+### 5.Multivalue Answer Routing Policy / 複数値回答ルーティングポリシー
 
 **Scenario:** Improving availability by returning up to eight healthy records in response to DNS queries. This allows the client to choose an alternative IP if one becomes unreachable.
 
@@ -108,8 +108,27 @@ Scenario: Implementing a Canary Deployment or A/B Testing by distributing traffi
 
 ---
 
+### 6.IP-based Routing Policy / IPベースルーティングポリシー
 
-## 🛠️ Tech Stack
-* **AWS Services:** Route 53, EC2, S3, VPC, CloudWatch (Health Checks)
-* **Web Server:** Apache (HTTPD) on Ubuntu
-* **Tools:** Draw.io (for Architecture Diagrams)
+**Scenario:** Routing traffic based on the specific CIDR block of the user. This allows fine-grained control over which server a user reaches based on their source IP address.
+**シナリオ:** ユーザーの特定のCIDRブロックに基づいてトラフィックをルーティングします。これにより、送信元IPアドレスに基づいてユーザーがアクセスするサーバーを詳細に制御できます。
+
+
+
+<details>
+<summary>Click here to view Configuration & Results / 設定と結果を表示するにはここをクリック</summary>
+
+| Step / ステップ | Description / 説明 | Screenshot / スクリーンショット |
+|:---:|---|:---:|
+| **1. CIDR Setup** | Defined CIDR collections for Location 1, 2, and 3. / ロケーション1、2、3のCIDRコレクションを定義しました。 | [![CIDR Locations](images/ip-based-cidr-locations.png) |
+| **2. Config** | Assigned A records to the defined CIDR locations in Route 53. / Route 53で定義されたCIDRロケーションにAレコードを割り当てました。 | [![Hosted Zone](images/ip-based-hosted-zone.png)|
+| **3. Verification (Region A)** | Testing from Ohio (Location 1) resolves to server `1.1.1.1`. / オハイオ（ロケーション1）からのテストにより、サーバー`1.1.1.1`に解決。 | [![Ohio Result](images/ip-based-verification-ohio.png) |
+| **4. Verification (Region C)** | Testing from Mumbai (Location 2) resolves to server `2.2.2.2`. / ムンバイ（ロケーション2）からのテストにより、サーバー`2.2.2.2`に解決。 | [![Mumbai Result](images/ip-based-verification-mumbai.png) |
+| **5. Verification (Region B)** | Testing from Singapore (Location 3) resolves to server `3.3.3.3`. / シンガポール（ロケーション3）からのテストにより、サーバー`3.3.3.3`に解決。 | [![Singapore Result](images/ip-based-verification-singapore.png) |
+
+</details>
+
+---
+
+
+
