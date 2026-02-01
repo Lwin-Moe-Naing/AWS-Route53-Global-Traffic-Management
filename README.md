@@ -89,6 +89,26 @@ Scenario: Implementing a Canary Deployment or A/B Testing by distributing traffi
 </details>
 ---
 
+### 5️⃣ Multivalue Answer Routing Policy / 複数値回答ルーティングポリシー
+
+**Scenario:** Improving availability by returning up to eight healthy records in response to DNS queries. This allows the client to choose an alternative IP if one becomes unreachable.
+
+**シナリオ:** DNSクエリに対して最大8つの正常なレコードを返すことで可用性を向上させます。これにより、1つのIPが利用不能になった場合にクライアントが別のIPを選択できるようになります。
+
+<details>
+<summary>Click here to view Configuration & Results / 設定と結果を表示するにはここをクリック</summary>
+
+| Step / ステップ | Description / 説明 | Screenshot / スクリーンショット |
+|:---:|---|:---:|
+| **1. Config** | Three A records configured with Multivalue Answer routing and associated health checks. / 複数値回答ルーティングと関連するヘルスチェックを設定した3つのAレコード。 | [![Config](images/multivalue-hosted-zone.png) |
+| **2. Verification** | `nslookup` returns multiple IP addresses (`18.223.171.99`, `52.66.248.11`, `13.229.237.120`) in a single response. / `nslookup` により、1回のレスポンスで複数のIPアドレスが返されることを確認。 | [![Verification](images/multivalue-nslookup-results.png) |
+| **3. Health Checks** | Route 53 monitors all endpoints to ensure only healthy records are returned to users. / Route 53が全エンドポイントを監視し、正常なレコードのみをユーザーに返すようにします。 | [![Health Checks](images/multivalue-health-checks.png) |
+
+</details>
+
+---
+
+
 ## 🛠️ Tech Stack
 * **AWS Services:** Route 53, EC2, S3, VPC, CloudWatch (Health Checks)
 * **Web Server:** Apache (HTTPD) on Ubuntu
